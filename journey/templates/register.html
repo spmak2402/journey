@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+        
+        
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: linear-gradient(to right, #ff9966, #ff5e62);
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+    
+            .form-container {
+                background-color: #f25a5a;
+                padding: 40px;
+                width: 350px;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                animation: fadeIn 1s ease-in-out;
+            }
+    
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+    
+            h1 {
+                font-size: 28px;
+                color: #f8272b;
+                padding-left: 500px;
+                margin-bottom: 20px;
+            }
+    
+            .form-container form {
+                display: flex;
+                flex-direction: column;
+            }
+    
+            .form-container input[type="text"],
+            .form-container input[type="email"],
+            .form-container input[type="password"] {
+                width: 100%;
+                padding: 12px;
+                font-size: 14px;
+                border: 2px solid #ff5e62;
+                border-radius: 8px;
+                background-color: hsl(0, 75%, 63%);
+                margin-bottom: 15px;
+                outline: none;
+                transition: border-color 0.3s ease-in-out;
+            }
+    
+            .form-container input[type="text"]:focus,
+            .form-container input[type="email"]:focus,
+            .form-container input[type="password"]:focus {
+                border-color: #ff9966;
+                box-shadow: 0 0 8px rgba(255, 99, 102, 0.5);
+            }
+            td {
+                background-color: #d75858;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(255, 38, 38, 0.779);
+                color: #f25a5a;
+
+            }
+            .form-container input[type="submit"] {
+                width: 100%;
+                padding: 15px;
+                font-size: 16px;
+                border: none;
+                border-radius: 8px;
+                background-color: #ff5e62;
+                color: rgb(84, 3, 3);
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+    
+            .form-container input[type="submit"]:hover {
+                background-color: #ff9966;
+                transform: scale(1.05);
+            }
+    
+            .form-container input[type="submit"]:active {
+                transform: scale(0.95);
+            }
+    
+            .form-container a {
+                display: block;
+                margin-top: 20px;
+                font-size: 14px;
+                color: #ff5e62;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+    
+            .form-container a:hover {
+                color: #ff9966;
+                text-decoration: underline;
+            }
+    
+            .or {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 20px 0;
+            }
+    
+            .or::before, .or::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background-color: #dbdbdb;
+            }
+    
+            .or::before {
+                margin-right: 15px;
+            }
+    
+            .or::after {
+                margin-left: 15px;
+            }
+    
+            .or span {
+                font-size: 14px;
+                color: #8e8e8e;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 align = 'center'>Register</h1>
+
+        <table align="center" border="2">
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <tr>
+                    <th>Username</th>
+                    <td><input type="text" name="username"></td>
+                </tr>
+
+                <tr>
+                    <th>First Name</th>
+                    <td><input type="text" name="first_name"></td>
+
+                </tr>
+
+                <tr>
+                    <th>Last Name</th>
+                    <td><input type="text" name="last_name"></td>
+                </tr>
+
+                <tr>
+                    <th>Email</th>
+                    <td><input type="email" name="email"></td>
+                </tr>
+
+                <tr>
+                    <th>Password</th>
+                    <td><input type="password" name="password"></td>
+                </tr>
+
+                <tr>
+                    <th>Confirm Password</th>
+                    <td><input type="password" name="confirm_password"></td>
+                </tr>
+
+                <tr>
+                    <th colspan="2" align="center"><input type="submit" value="submit"></th>
+                </tr>
+
+            </form>
+        </table>
+    </body>
+</html>

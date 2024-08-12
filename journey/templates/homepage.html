@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            padding: 40px;
+            width: 350px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-family: 'Cookie', cursive;
+            font-size: 48px;
+            color: #262626;
+            margin-bottom: 40px;
+        }
+
+        .auth-links a {
+            display: block;
+            text-decoration: none;
+            color: #0095f6;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            color: #005b9f;
+        }
+
+        .auth-links {
+            margin-top: 20px;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-links a {
+            color: #8e8e8e;
+            font-size: 12px;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            color: #262626;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 align="center">Journey</h1>
+
+        {% if request.user.is_authenticated %}
+            <div class="auth-links">
+                <a href="/logout">Logout</a>
+                <a href="/create_log">Create Log</a>
+                <a href="/read_log">Read Log</a>
+                <a href="/profile">Profile View</a>
+                <a href="/show_users">Show Users</a>
+            </div>
+        {% else %}
+            <div class="auth-links">
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Help</a>
+        <a href="#">Press</a>
+        <a href="#">API</a>
+        <a href="#">Jobs</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+    </div>
+</body>
+</html>

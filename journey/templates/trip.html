@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Post</title>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f2f5;
+                color: #333;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+            h1 {
+                color: #4a90e2;
+                margin-bottom: 20px;
+            }
+            form {
+                background: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 500px;
+            }
+            div {
+                margin-bottom: 15px;
+            }
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+                color: #333;
+            }
+            textarea {
+                width: 100%;
+                height: 100px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            input[type="file"] {
+                display: block;
+                margin-top: 5px;
+            }
+            button {
+                background-color: #4a90e2;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            button:hover {
+                background-color: #357ABD;
+            }
+            p {
+                margin-top: 10px;
+                font-size: 14px;
+            }
+            .error {
+                color: #e74c3c;
+                font-size: 14px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Create Post</h1>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label for="caption">Caption:</label>
+                <textarea id="caption" name="caption"></textarea>
+            </div>
+            <div>
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" required>
+            </div>
+            <button type="submit">Create Post</button>
+        </form>
+
+        
+    </body>
+</html>

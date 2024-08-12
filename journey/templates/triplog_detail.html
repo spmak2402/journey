@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'C:\Users\Admin\OneDrive\Desktop\JT Project/background.jpg' %}"); /* Replace with the URL of your background image */
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        input{
+            width: 80%;
+            padding-right: 50;
+        }
+        .post {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin: 20px auto;
+            border: 1px solid #dbdbdb;
+            border-radius: 10px;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .image--cover {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .post span {
+            font-weight: bold;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .post form {
+            margin-left: auto;
+        }
+
+        .post button {
+            background-color: #3897f0;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .post button:hover {
+            background-color: #287cc0;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .like-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .like-btn {
+            background-color: transparent;
+            border: none;
+            color: #3897f0;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .like-btn:hover {
+            color: #287cc0;
+        }
+
+        .like-count {
+            font-size: 16px;
+            color: #333;
+        }
+
+        p {
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+
+        table {
+            margin: 20px auto;
+            width: 90%;
+        }
+
+        table input[type="text"] {
+            width: 95%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #dbdbdb;
+            border-radius: 5px;
+        }
+
+        table input[type="submit"] {
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        table input[type="submit"]:hover {
+            background-color: #287cc0;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 40px;
+            color: #333;
+        }
+
+        .comment-section {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #dbdbdb;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-section p {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        .comment-section p:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    {% for x in data %}
+    <div class="post">
+        <div class="post-header">
+            <div class="wrapper">
+                {% for p in profile %}
+                <a href="/detail_users/{{p.id}}"><img src="{{p.profile_pic.url}}" class="image--cover"></a>
+                {% endfor %}
+                <span>{{ x.user.username }}'s Profile</span>
+            </div>
+            <form action="/follow_user/{{x.id}}" method="POST">
+                {% csrf_token %}
+                <button type="submit">
+                    {% if user_has_followed %}
+                    Unfollow
+                    {% else %}
+                    Follow
+                    {% endif %}
+                </button>
+            </form>
+        </div>
+
+        <img src="{{ x.image.url }}" alt="Profile image" height="300px" width="600px">
+
+        <div class="like-section">
+            <form action="/likes_count/{{x.id}}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ x.id }}">
+                <button type="submit" class="like-btn">
+                    {% if user_has_liked %}
+                    Unlike
+                    {% else %}
+                    Like
+                    {% endif %}
+                </button>
+            </form>
+            <p class="like-count">Likes: {{ x.like_count }}</p>
+        </div>
+
+        <table align="center" border="2">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <tr>
+                    <th>Comments</th>
+                    <td><input type="text" name="comments"></td>
+                </tr>
+
+                <tr>
+                    <th align="center"><input type="submit" value="submit"></th>
+                </tr>
+            </form>
+        </table>
+
+        <h3>Comments:</h3>
+
+        <div class="comment-section">
+            {% for c in comment %}
+            <p>{{ c.comments }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</body>
+
+</html>

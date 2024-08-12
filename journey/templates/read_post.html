@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Feed</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin: 20px 0;
+            border-bottom: 1px solid #dbdbdb;
+            padding-bottom: 10px;
+        }
+
+        .post {
+            border-bottom: 1px solid #dbdbdb;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .post img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .post img:hover {
+            transform: scale(1.05);
+        }
+
+        .post-info {
+            width: 100%;
+            max-width: 500px;
+            padding: 0 10px;
+        }
+
+        .post-info p {
+            margin: 5px 0;
+        }
+
+        .username {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #262626;
+        }
+
+        .caption {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .likes {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #262626;
+        }
+
+        a {
+            color: #3897f0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Posts</h1>
+        {% for post in data %}
+        <div class="post">
+            <div class="post-info">
+                <p class="username">{{ post.user.username }}</p>
+            </div>
+            <a href="/triplog_detail/{{ post.id }}">
+                <img src="{{ post.image.url }}" alt="{{ post.caption }}">
+            </a>
+            <div class="post-info">
+                <p class="caption">{{ post.caption }}</p>
+                <p class="likes">{{ post.like_count }} likes</p>
+                <p class="timestamp">{{ post.created_at }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
