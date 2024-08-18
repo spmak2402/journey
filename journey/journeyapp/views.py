@@ -178,7 +178,7 @@ def profile_view(request):
 
 def read_log(request):
     
-    posts = Triplog.objects.all().order_by('-created_at')
+    posts = Triplog.objects.all().exclude(user = request.user).order_by('-created_at')
     
     
     context = {}
@@ -205,7 +205,9 @@ def triplog_detail(request, rid):
     
     log = Triplog.objects.filter(id = rid)     #use for to send in html
     
-    com = Comment.objects.all().order_by('-created_at')
+    l = Triplog.objects.get(id = rid)
+    
+    com = Comment.objects.filter(triplog = l).order_by('-created_at')
     
     
     

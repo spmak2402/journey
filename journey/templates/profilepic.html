@@ -1,123 +1,379 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Pic</title>
+    <style>
+        body {
+            background-color: #efefef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #555;
+        }
+
+        .profile-pic-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            object-fit: cover;
+        }
+
+        .file-upload {
+            display: none;
+        }
+
+        .upload-button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(66, 64, 64, 0.5);
+            color: white;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        input[type="text"], input[type="date"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="profile-pic-container">
+                <img class="profile-pic" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Profile Picture">
+                <div class="upload-button">
+                    <i class="fa-solid fa-camera"></i>
+                    <input class="file-upload" type="file" name="profile_pic">
+                </div>
+            </div>
+            <br><br>
+            <div class="info">
+                {% csrf_token %}
+                <tr>
+                    <th>Bio</th>
+                    <td><input type="text" name="bio"></td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td><input type="text" name="location"></td>
+                </tr>
+                <tr>
+                    <th>Birth Date</th>
+                    <td><input type="date" name="birth_date"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Submit"></td>
+                </tr>
+            </div>
+        </form>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            var readURL = function(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.profile-pic').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $(".file-upload").on('change', function(){
+                readURL(this);
+            });
+
+            $(".upload-button").on('click', function() {
+                $(".file-upload").click();
+            });
+        });
+    </script>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Profile Pic</title>
-        <style>
-            body {
-                background-color: #efefef;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
 
-            .profile-pic-container {
-                position: relative;
-                width: 150px;
-                height: 150px;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-            .profile-pic {
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                border: 2px solid rgba(255, 255, 255, 0.2);
-                object-fit: cover;
-            }
+        .navbar {
+            background-color: #343a40;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-            /* .file-upload {
-                display: none;
-            } */
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
 
-            .upload-button {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                background-color: rgba(66, 64, 64, 0.5);
-                color: white;
-                padding: 5px;
-                border-radius: 50%;
-                cursor: pointer;
-            }
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
 
-            .upload-button:hover {
-                background-color: rgba(0, 0, 0, 0.7);
-            }
-            .info {
-                height: 50px;
-                width: 100px;
-            }
-        </style>
-    </head>
-    <body>
-        <table>
-            <form method="POST" enctype="multipart/form-data">
-                <div class="profile-pic-container">
-                    <img class="profile-pic" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Profile Picture">
-                    <div class="upload-button">
-                        <i class="fa-solid fa-camera"></i>
-                        <input class="file-upload" type="file" name ="profile_pic">
-                    </div>
-                </div>
+        .navbar a:hover {
+            color: #007bff;
+        }
 
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-                <script>
-                    $(document).ready(function() {
-                        var readURL = function(input) {
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
+        .navbar .logout {
+            color: #dc3545;
+        }
 
-                                reader.onload = function (e) {
-                                    $('.profile-pic').attr('src', e.target.result);
-                                }
+        .profile-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
+        .profile-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
 
-                        $(".file-upload").on('change', function(){
-                            readURL(this);
-                        });
+        .profile-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-                        $(".upload-button").on('click', function() {
-                            $(".file-upload").click();
-                        });
-                    });
-                </script>
-                <br>
-                <br>
-                <div class="info">
-                   
-                        {% csrf_token %}
+        .profile-container .input-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-                        <tr>
-                            <th>Bio</th>
-                            <td><input type="text" name="bio"></td>
-                        </tr>
-                        <br>
-                        <tr>
-                            <th>location</th>
-                            <td><input type="text" name="location"></td>
-                        </tr>
-                        <br>
-                        <tr>
-                            <th>Birth Date</th>
-                            <td><input type="date" name="birth_date"></td>
-                        </tr>
-                        <tr>
-                            <th align="center"><input type="submit" value="submit"></th>
-                        </tr>
-                        
-            </form>
+        .profile-container input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .profile-container .image-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-container .image-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-container textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .profile-container input[type="date"],
+        .profile-container input[type="submit"] {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .profile-container input[type="submit"] {
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+            border: none;
+        }
+
+        .profile-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 20px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href=""><h1>Throttle Guide</h1></a>
+        <div>
+            {% if user.is_authenticated %}
+            <a href="/create_cars">Add Cars</a>
+            <a href="/read_cars">Show Cars</a>
+            <a href="/read_profile">Show Profile</a>
+            <a href="/show_users">Show Users</a>
+            <a href="/logout" class="logout">Logout</a>
+            {% else %}
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+            {% endif %}
         </div>
-        
+    </div>
 
-        </table>
-    </body>
+    <div class="profile-container">
+        <h1>Make Your Profile</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-container">
+                <label for="profile" class="image-wrapper">
+                    <img src="#" id="profile-preview" alt="Profile Image Preview">
+                    <input type="file" name="profile_pic" id="profile" accept="image/*" onchange="previewImage(event)">
+                </label>
+            </div>
+            <div>
+                <label for="bio">Bio</label>
+                <textarea name="bio" id="bio" rows="4" cols="50"></textarea>
+            </div>
+            <div>
+                <label for = "location">Location</th>
+                <textarea name="location" id = "lication" rows = "4" cols="50"></textarea>
+            </div>
+            <div>
+                <label for="dob">D.O.B</label>
+                <input type="date" name="birth_date" id="dob">
+            </div>
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Throttle Guide. All rights reserved.</p>
+        <p>Contact us at <a href="mailto:contact@throttleguide.com">contact@throttleguide.com</a></p>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profile-preview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+
 </html>
-

@@ -1,112 +1,115 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Profile</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-image: url('https://your-image-url.com/background.jpg'); /* Replace with your chosen background image */
-                background-size: cover;
-                background-attachment: fixed;
-                background-repeat: no-repeat;
-                margin: 0;
-                padding: 0;
-                color: #333;
-            }
-    
-            .profile-container {
-                background-color: rgba(255, 255, 255, 0.8);
-                padding: 30px;
-                max-width: 600px;
-                margin: 50px auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                text-align: center;
-            }
-    
-            h1 {
-                font-size: 28px;
-                color: #333;
-                margin-bottom: 20px;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            }
-    
-            p {
-                font-size: 18px;
-                color: #555;
-                margin: 10px 0;
-            }
-    
-            p strong {
-                color: #333;
-            }
-    
-            img {
-                margin-top: 20px;
-                max-width: 100%;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
+<head>
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://your-image-url.com/background.jpg'); /* Replace with your chosen background image */
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
-            .posts-container {
-                margin-top: 40px;
-            }
+        .profile-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            max-width: 600px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-            .post {
-                margin-bottom: 30px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid #ddd;
-            }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-            .post img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
+        p {
+            font-size: 18px;
+            color: #555;
+            margin: 10px 0;
+        }
 
-            .post p {
-                font-size: 16px;
-                color: #333;
-                margin: 10px 0;
-            }
+        p strong {
+            color: #333;
+        }
 
-            .post h3 {
-                font-size: 20px;
-                color: #333;
-                margin-bottom: 10px;
-            }
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-            .post-time {
-                font-size: 14px;
-                color: #999;
-            }
+        .posts-container {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
 
-            .like-count {
-                font-size: 16px;
-                color: #666;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="profile-container">
-            <h1>{{ profile.user.username }}</h1>
-            <p><strong>Bio:</strong> {{ profile.bio }}</p>
-            <p><strong>Location:</strong> {{ profile.location }}</p>
-            <p><strong>Birth Date:</strong> {{ profile.birth_date }}</p>
-            <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" height="300" width="600">
-        </div>
+        .post {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
 
-        <div class="posts-container">
-            {% for post in posts %}
-            <div class="post">
+        .post img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .post-content {
+            padding: 10px;
+        }
+
+        .post h3 {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .post-time {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .like-count {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>{{ profile.user.username }}</h1>
+        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        <p><strong>Location:</strong> {{ profile.location }}</p>
+        <p><strong>Birth Date:</strong> {{ profile.birth_date }}</p>
+        <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" height="300" width="600">
+    </div>
+
+    <div class="posts-container">
+        {% for post in posts %}
+        <div class="post">
+            <img src="{{ post.image.url }}" alt="{{ post.caption }}">
+            <div class="post-content">
                 <h3>{{ post.caption }}</h3>
-                <img src="{{ post.image.url }}" alt="{{ post.caption }}">
                 <p class="post-time">Posted on: {{ post.created_at }}</p>
                 <p class="like-count">Likes: {{ post.like_count }}</p>
             </div>
-            {% endfor %}
         </div>
-    </body>
+        {% endfor %}
+    </div>
+</body>
 </html>

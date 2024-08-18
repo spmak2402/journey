@@ -1,84 +1,84 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Journey Tales</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
     <style>
-        body {
-            
-            background-image: url('background.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% 100%;
-
-            font-family: Arial, sans-serif;
-            /* background-color: #f0f2f5; */
-            /* display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0; */
-            /* color: #333; */
+        /* Navbar Styles */
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
         }
 
-        h1 {
-            color: #333;
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            margin: 10px 0;
-        }
-
-        a {
-            text-decoration: none;
-            color: #0095f6;
-            font-size: 18px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #005b9f;
-        }
-
-        .links {
-            text-align: center;
-        }
-
-        .auth-links {
+        .container {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
+        .logo {
+            font-size: 1.5em;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
     </style>
-    
 </head>
 <body>
-    <h1 align = "center">Index</h1>
-
-    {% if request.user.is_authenticated%}
-
-        <h3 align = "center"><a href="/logout">Logout</a></h3>
-
-        <h3 align = "center"><a href="/create_log">Create Log</a></h3>
-
-        <h3 align = "center"><a href="/read_log">Read Log</a></h3>
-
-        <h3 align = "center"><a href="/profile">Profile View</a></h3>
-
-        <h3 align = "center"><a href="/show_users">Show Users</a></h3>
-
-    {% else %}
-
-        <h3 align = "center"><a href="/register">Register</a></h3>
-
-        <h3 align = "center"><a href="/login">Login</a></h3>
-
-    {% endif %}
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="{% url 'index' %}" class="logo">Journey Tales</a>
+                <ul class="nav-links">
+                    {% if request.user.is_authenticated %}
+                        <li><a href="/create_log">Create Log</a></li>
+                        <li><a href="/read_log">Read Log</a></li>
+                        <li><a href="/profile">Profile View</a></li>
+                        <li><a href="/show_users">Show Users</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Your page content goes here -->
+    </main>
+    <footer>
+        <!-- Your footer content goes here -->
+    </footer>
 </body>
 </html>
+

@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name= "index"),
     path('register', views.user_register),
     path('login', views.user_login),
     path('logout', views.user_logout),
@@ -17,7 +17,6 @@ urlpatterns = [
     path('show_users', views.show_users),
     path('detail_users/<rid>', views.detail_users),
     path('follow_user/<rid>', views.follow_user),
-    
     path('forgot_password', views.forgot_password),
     path('otp_verification', views.otp_verification),
     path('new_password', views.new_password),

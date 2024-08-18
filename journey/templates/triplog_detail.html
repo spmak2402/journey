@@ -177,6 +177,19 @@
         .comment-section p:last-child {
             border-bottom: none;
         }
+        .comment-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .comment-section li {
+            background: #f1f1f1;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: #495057;
+        }
     </style>
 </head>
 
@@ -238,8 +251,13 @@
 
         <div class="comment-section">
             {% for c in comment %}
-            <p>{{ c.comments }}</p>
+                <li>
+                    <strong>{{ c.user.username }}</strong>: {{ c.comments }} <br>
+                    
+                </li>
             {% endfor %}
+
+            
         </div>
     </div>
     {% endfor %}
