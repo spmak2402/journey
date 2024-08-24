@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'journey.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'journeydb',
+        'NAME': 'jtales_db',
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': '',

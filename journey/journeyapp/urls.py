@@ -20,6 +20,9 @@ urlpatterns = [
     path('forgot_password', views.forgot_password),
     path('otp_verification', views.otp_verification),
     path('new_password', views.new_password),
+    path('delete_log/<rid>', views.delete_log),
+    path('update_profile/<rid>', views.update_profile),
+    path('show_detail_post/<rid>', views.triplog_detail)
     
     
 ]

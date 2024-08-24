@@ -161,6 +161,9 @@ def profile_view(request):
     
     # Retrieve the user's profile or return a 404 if it doesn't exist
     profile = get_object_or_404(Profile, user=user)
+    pro = Profile.objects.filter(user = user)
+    
+    # t = Triplog.objects.filter(user = user)
     
     posts = Triplog.objects.filter(user=user).order_by('-created_at')
     
@@ -169,16 +172,44 @@ def profile_view(request):
     
     context['profile'] = profile
     context['posts'] = posts
+    context['pro'] = pro
+    # context["data"] = t
     
     # Pass the profile to the template
     return render(request, 'read_profile.html', context)
 
+
+
+def update_profile(request, rid):
     
+    if request.method == "GET":
+        
+        p = Profile.objects.filter(id = rid)
+        
+        context = {}
+        
+        context['data'] = p
+        
+        return render(request, 'updateprofile.html', context)
     
+    else:
+        
+        bio = request.POST['bio']
+        
+        location = request.POST['location']
+        birth_date = request.POST['birth_date']
+            
+        p = Profile.objects.filter(id = rid)
+        
+        p.update(bio = bio, location = location, birth_date = birth_date)
+        
+        return redirect('/profile')
 
 def read_log(request):
     
     posts = Triplog.objects.all().exclude(user = request.user).order_by('-created_at')
+    
+    
     
     
     context = {}
@@ -331,7 +362,7 @@ def follow_user(request,rid):
         user_profile.save()
     
     
-    return redirect('/show_users')
+    return redirect(f'/detail_users/'+ rid)
 
 # def create_comments(request, rid):
     
@@ -455,3 +486,47 @@ def new_password(request):
             return render(request, 'new_password.html', context)
         
         
+def delete_log(request, rid):
+    
+    trip = Triplog.objects.filter(id = rid)
+    
+    trip.delete()
+    
+    return redirect("/profile")
+
+def show_detail_post(request, rid):
+    p = Profile.objects.filter(id = rid)
+    
+    log = Triplog.objects.filter(id = rid)     #use for to send in html
+    
+    l = Triplog.objects.get(id = rid)
+    
+    com = Comment.objects.filter(triplog = l).order_by('-created_at')
+    
+    
+    
+    context = {}
+    
+    context['data'] = log
+    
+    context['profile'] = p
+    
+    context['comment'] = com
+    
+    if request.method == "GET":
+            
+        return render(request, "show_detail_post.html", context)
+        
+    else:
+            
+        comments = request.POST['comments']
+            
+        t = Triplog.objects.get(id = rid)
+            
+        c = Comment.objects.create(triplog = t, user = request.user, comments = comments)
+            
+        c.save()
+            
+        
+
+        return render(request, 'show_detail_post.html', context)

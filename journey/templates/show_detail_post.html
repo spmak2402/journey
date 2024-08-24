@@ -43,10 +43,7 @@
             margin-bottom: 20px;
         }
 
-        .wrapper {
-            display: flex;
-            align-items: center;
-        }
+        
 
         .image--cover {
             width: 50px;
@@ -196,7 +193,7 @@
 <body>
     {% for x in data %}
     <div class="post">
-        <div class="post-header">
+        <!-- <div class="post-header">
 
             
                 <div class="wrapper">
@@ -209,17 +206,8 @@
                     {% endfor %}
                 </div>
             
-            <form action="/follow_user/{{x.id}}" method="POST">
-                {% csrf_token %}
-                <button type="submit">
-                    {% if user_has_followed %}
-                    Unfollow
-                    {% else %}
-                    Follow
-                    {% endif %}
-                </button>
-            </form>
-        </div>
+           
+        </div> -->
 
         <img src="{{ x.image.url }}" alt="Profile image" height="300px" width="600px">
 

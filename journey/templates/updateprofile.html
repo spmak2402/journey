@@ -316,47 +316,37 @@
 
 <body>
     
+    
 
     <div class="profile-container">
         <h1>Make Your Profile</h1>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="input-container">
-                <label for="profile" class="image-wrapper">
-                    <img src="#" id="profile_pic" alt="Profile Image Preview">
-                    <input type="file" name="profile_pic" id="profile" accept="image/*" onchange="previewImage(event)">
-                </label>
-            </div>
-            <div>
-                <label for="bio">Bio</label>
-                <textarea name="bio" id="bio" rows="4" cols="50"></textarea>
-            </div>
-            <div>
-                <label for = "location">Location</th>
-                <textarea name="location" id = "lication" rows = "4" cols="50"></textarea>
-            </div>
-            <div>
-                <label for="dob">D.O.B</label>
-                <input type="date" name="birth_date" id="dob">
-            </div>
-            <div>
-                <input type="submit" value="Submit">
-            </div>
+            
+            {% for x in data %}
+
+                <div>
+                    <label for="bio">Bio</label>
+                    <textarea name="bio" id="bio" rows="4" cols="50"></textarea>
+                </div>
+                <div>
+                    <label for = "location">Location</th>
+                    <textarea name="location" id = "lication" rows = "4" cols="50"></textarea>
+                </div>
+                <div>
+                    <label for="dob">D.O.B</label>
+                    <input type="date" name="birth_date" id="dob">
+                </div>
+                <div>
+                    <input type="submit" value="Submit">
+                </div>
+
+            {% endfor %}
         </form>
     </div>
 
     
 
-    <script>
-        function previewImage(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-preview').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    </script>
 </body>
 
 </html>
